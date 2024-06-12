@@ -1,18 +1,17 @@
 // date e variabili globali/api key
 let api_Key ='iOM9Pa6tyniMbnuCWJksyfexbyEJLugShBgXnsZX';
-let api_Key2 ='sXypXBTu3UnfWhDfqZ6HKxVx2ckxgm4drQzfc2BB';
 let start = new Date;
-let [startYear, startMonth, startDay, endYear, endMonth,endDay]=[start.getFullYear(),start.getMonth()+1,start.getDate()-1, start.getFullYear(),start.getMonth()+1,start.getDate()-10];
+let [startYear, startMonth, startDay, endYear, endMonth,endDay]=[start.getFullYear(),start.getMonth()+1,start.getDate(), start.getFullYear(),start.getMonth()+1,start.getDate()-10];
 
 
-let start_date= startYear+'-'+startMonth+'-'+startDay;
-let end_date= endYear+'-'+endMonth+'-'+endDay;
-let astronomyPictures= `https://api.nasa.gov/planetary/apod?start_date=${start_date}&end_date=${end_date}&api_key=${api_Key}`;
-let astronomyPictures2 = `https://api.nasa.gov/planetary/apod?tart_date=${start_date}&end_date=${end_date}&api_key=DEMO_KEY`
-console.log(end_date);
-let mainContainer = document.getElementById('main-picture');
+let end_date= startYear+'-'+startMonth+'-'+startDay;
+let start_date= endYear+'-'+endMonth+'-'+endDay;
+ let astronomyPictures= `https://api.nasa.gov/planetary/apod?start_date=${start_date}&end_date=${end_date}&api_key=${api_Key}&thumbs=true`;
+  
 
-// settare le date per il l'api
+let mainContainer = document.querySelector('#main-picture');
+
+
 
 // dichiarare l'api key e la stringa da fetchare
 
@@ -21,20 +20,41 @@ let mainContainer = document.getElementById('main-picture');
 
 // funzione per fetchare le immagini,ritorno le immagini fetchate
 let  fetchPictures = ()=>{
-        let pictures =fetch(astronomyPictures)
-      .then(res =>res.json())
-      return pictures
+  let pictures = fetch(astronomyPictures)
+  .then(res => {
+     console.log(res)
+   if(res.ok) {
+      return res.json()} 
+      else {
+    throw new Error(res.status)
+    }})
+  
+  .catch(
+    error => {
+      console.log(error);
+      mainContainer.textContent = error;
+    }
+  )
+  .finally(() => console.log('fine!'));
+  
+return pictures;
 }
-let fetchedPicture =fetchPictures()
+fetchPictures()
+
 // dalle pictures chiamo la funzione per creare l'immagine principale
-.then(pictures =>{createMainPicture(pictures.at(-1))
+
+.then(
+  pictures =>{console.log(pictures)
+  createMainPicture(pictures.at(-1));
 })
 
-function createMainPicture(pictures){
-let img = document.createElement('img')
- img.src = pictures.url;
+ 
+let createMainPicture =(picture)=>{
+  mainContainer.innerHTML='';
+let img = document.createElement('img');
+ img.src = picture.url;
 mainContainer.append(img);
-console.log(pictures);
+console.log(picture);
 }
 // previous image
 
