@@ -11,6 +11,8 @@ let start_date= endYear+'-'+endMonth+'-'+endDay;
 
 let mainContainer = document.querySelector('#main-picture');
 
+let picturesContainer = document.querySelector('.pictures-container')
+
 
 
 // dichiarare l'api key e la stringa da fetchare
@@ -44,21 +46,71 @@ fetchPictures()
 // dalle pictures chiamo la funzione per creare l'immagine principale
 
 .then(
-  pictures =>{console.log(pictures)
+  pictures =>{
   createMainPicture(pictures.at(-1));
+  createPreviouspictures(pictures.reverse().slice(1));
 })
 
- 
+//  main picture
 let createMainPicture =(picture)=>{
   mainContainer.innerHTML='';
+
 let img = document.createElement('img');
  img.src = picture.url;
 mainContainer.append(img);
 console.log(picture);
+let title = document.createElement('h3');
+title.textContent = picture.title;
+mainContainer.append(title);
+let textContainer = document.createElement('div');
+textContainer.classList.add('text-container');
+let description = document.createElement('p');
+
+description.textContent = picture.explanation;
+mainContainer.append(textContainer);
+textContainer.append(title);
+textContainer.append(description);
 }
+
+
 // previous image
+let createPreviouspictures = (pictures)=>{picturesContainer.innerHTML ='';
+  pictures.map(picture=>{
+                                                                  let pictureContainer= document.createElement('div');
+                                                                  pictureContainer.classList.add('picture-container')
+                                                                let img = document.createElement('img');
+                                                                  img.src = picture.url;
+                                                                  pictureContainer.append(img);
+                                                                  picturesContainer.append(pictureContainer);
+                                                                  pictureContainer.addEventListener('click',()=>{displayModal(picture)})
+                                  
+                  
+                                       })}
+
+function displayModal(picture){let modal = document.querySelector('#picture-details-container');
+                                modal.style.display='flex';
+                                let modaltitle= document.querySelector('#picture-title');
+                                modaltitle.textContent= picture.title;
+                                let img = document.querySelector('#picture-img');
+                                img.src =picture.url;
+                                let closebutton = document.querySelector('#close-button');
+                                closebutton.addEventListener('click',()=>{modal.style.display='none';
+                                    let description = document.querySelector('#picture-description');
+                                  description.textContent = picture.explanation;
+                                let copyright = document.querySelector('#picture-copyright');
+                              copyright.textContent = picture.copyright})
+
+                              }
 
 
+                                                  
+
+
+
+
+
+
+                                                    
 // google charts
 
 // dati di curiosity
