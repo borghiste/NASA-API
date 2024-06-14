@@ -1,7 +1,7 @@
 // date e variabili globali/api key
 let api_Key ='iOM9Pa6tyniMbnuCWJksyfexbyEJLugShBgXnsZX';
 let start = new Date;
-let [startYear, startMonth, startDay, endYear, endMonth,endDay]=[start.getFullYear(),start.getMonth()+1,start.getDate(), start.getFullYear(),start.getMonth()+1,start.getDate()-10];
+let [startYear, startMonth, startDay, endYear, endMonth,endDay]=[start.getFullYear(),start.getMonth()+1,start.getDate(), start.getFullYear(),start.getMonth(),start.getDate()-12];
 
 
 let end_date= startYear+'-'+startMonth+'-'+startDay;

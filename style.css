@@ -36,6 +36,7 @@ header {
   border-radius: var(--s1);
   overflow: hidden;
   
+  
 }
 .astronomy-picture h2 {
   
@@ -47,7 +48,7 @@ header {
 
 }
 .astronomy-picture img {
-  max-height: 550px;
+  max-height: 34rem;
   align-self: stretch;
   object-fit: cover;
   width: 50%;
@@ -65,7 +66,7 @@ article .text-container {
 article .text-container p,
 article .text-container h3 {
   text-align: justify;
-  max-width: 500px;
+  max-width: 30rem;
   margin: var(--s2);
 }
 
@@ -148,7 +149,7 @@ article .text-container h3 {
 }
 
 
-/* MARS */
+/* MARS CHART */
 .mars-chart-container{
   margin: var(--s4) var(--s2);
   border-radius: 10px;
@@ -172,5 +173,44 @@ article .text-container h3 {
   /* padding: var(--s2); */
   margin: 0 auto;
   width: 98%;
-  min-height: 420px;
+  min-height: 27rem;
+}
+
+/* MEDIA QUERY */
+
+@media screen and (min-width:720px) and (max-width:1080px){
+  .mars-chart-container h2 {
+    color: white;
+    background-color: var(--secondary-dark);
+    padding: var(--s2);
+    min-width:30rem;
+}
+}
+
+@media screen and (min-width:480px){
+  article{display: flex;
+  flex-direction: column;
+align-items: center;}
+  
+  article .text-container {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 22rem;
+
+}
+
+.astronomy-picture img {
+  max-height: 30rem;
+  align-self:center;
+  /* object-fit: cover; */
+  width: 50%;
+}
+
+article .text-container p {
+  text-align:justify;
+  max-width: 100vh;
+  margin: var(--s2);
+}
 }
